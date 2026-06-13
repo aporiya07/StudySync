@@ -1,4 +1,4 @@
-# Test Cases — StudySync (MindMitra)
+# Test Cases — StudySync
 
 ## Running Tests
 
@@ -70,7 +70,7 @@ These require both servers running locally or the app deployed on Vercel.
 
 ### MT-04 — Companion Chat (Normal Message)
 **Steps:** Navigate to `/chat` → type `"I'm feeling overwhelmed with my studies"` → Send  
-**Expected:** Empathetic 3–5 sentence reply from MindMitra, `isCrisis: false`
+**Expected:** Empathetic 3–5 sentence reply from StudySync AI, `isCrisis: false`
 
 ### MT-05 — Crisis Detection (Safety Gate)
 **Steps:** In chat → type `"I want to end my life"`  

@@ -1,8 +1,8 @@
-# StudySync — MindMitra
+# StudySync
 
 **Balance your studies and wellbeing.**
 
-MindMitra helps Indian exam aspirants (NEET, JEE, CUET, CAT, GATE, UPSC) balance intense study schedules with mental wellness. Unlike generic mood apps, StudySync maps stress triggers to study patterns and exam countdown urgency — surfacing correlations like *"stress spikes when sleep < 6h and study > 8h"* and offering immediate 2–5 minute coping strategies plus a safe AI companion.
+StudySync helps Indian exam aspirants (NEET, JEE, CUET, CAT, GATE, UPSC) balance intense study schedules with mental wellness. Unlike generic mood apps, StudySync maps stress triggers to study patterns and exam countdown urgency — surfacing correlations like *"stress spikes when sleep < 6h and study > 8h"* and offering immediate 2–5 minute coping strategies plus a safe AI companion.
 
 ## Features
 
@@ -10,13 +10,13 @@ MindMitra helps Indian exam aspirants (NEET, JEE, CUET, CAT, GATE, UPSC) balance
 - **Daily check-in** — mood, stress, energy, sleep, study hours, challenges, adaptive reflection
 - **Today's insights** — AI-generated coping strategy after each check-in
 - **Weekly dashboard** — Burnout Radar, Hidden Stress Triggers, Weekly Pattern Analysis
-- **Companion chat** — MindMitra empathetic chat with crisis detection guardrails
+- **Companion chat** — AI chat with crisis detection guardrails
 
 ## Safety
 
 - Crisis keyword detection runs **before** any AI call on chat
 - Fixed India helplines returned for crisis messages: iCall (9152987821), Vandrevala Foundation (1860-2662-345)
-- Standing disclaimer: *MindMitra supports emotional wellness and is not a substitute for professional help.*
+- Standing disclaimer: *StudySync AI supports emotional wellness and is not a substitute for professional help.*
 
 ## Setup
 
@@ -81,7 +81,7 @@ NODE_ENV=production npm start
 
 - **Frontend:** React (Vite) + Tailwind CSS + React Router
 - **Backend:** Node.js + Express
-- **AI:** Google Gemini (`gemini-3.5-flash` for analysis, `gemini-2.5-flash-lite` for coping + chat)
+- **AI:** Google Gemini (`gemini-2.5-flash` for analysis, `gemini-2.5-flash-lite` for coping + chat)
 - **Storage:** localStorage (profile + check-in history)
 
 ## Docs

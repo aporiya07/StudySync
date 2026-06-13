@@ -1,4 +1,4 @@
-# Evaluation Notes — StudySync (MindMitra)
+# Evaluation Notes — StudySync
 
 A self-assessment against the judging criteria.
 
@@ -59,7 +59,7 @@ A self-assessment against the judging criteria.
 
 **Problem:** Indian competitive exam students (JEE, NEET, UPSC etc.) face extreme mental pressure with no wellness tools tailored to their specific context.
 
-| Requirement | How MindMitra addresses it |
+| Requirement | How StudySync addresses it |
 |---|---|
 | Track daily mental state | Daily check-in: mood, stress, energy, sleep, study hours, challenges |
 | Surface study-specific patterns | Weekly Dashboard correlates sleep deprivation with stress spikes, identifies challenge patterns |

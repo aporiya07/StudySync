@@ -11,6 +11,22 @@
   #root {
     @apply min-h-screen;
   }
+
+  /* Fix native select/option visibility on dark backgrounds */
+  select {
+    background-color: #1e1f3a;
+    color: #f1f5f9;
+  }
+
+  select option {
+    background-color: #1e1f3a;
+    color: #f1f5f9;
+  }
+
+  /* Date input icon color */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+  }
 }
 
 @layer components {
@@ -19,7 +35,7 @@
   }
 
   .ss-input {
-    @apply w-full rounded-xl border border-ss-border bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-teal-400/50 focus:ring-2 focus:ring-teal-400/20;
+    @apply w-full rounded-xl border border-ss-border bg-[#1e1f3a] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-violet-400/60 focus:ring-2 focus:ring-violet-400/20;
   }
 
   .ss-label {
@@ -27,7 +43,7 @@
   }
 
   .ss-btn {
-    @apply rounded-xl bg-gradient-to-r from-teal-500 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply rounded-xl bg-gradient-to-r from-violet-500 to-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .ss-btn-ghost {
@@ -35,11 +51,11 @@
   }
 
   .ss-chip {
-    @apply cursor-pointer rounded-full border border-ss-border bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-teal-400/40;
+    @apply cursor-pointer rounded-full border border-ss-border bg-[#1e1f3a] px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-violet-400/40;
   }
 
   .ss-chip-active {
-    @apply border-teal-400/60 bg-teal-400/10 text-teal-300;
+    @apply border-violet-400/60 bg-violet-400/10 text-violet-300;
   }
 
   .ss-nav-item {
@@ -47,6 +63,6 @@
   }
 
   .ss-nav-item-active {
-    @apply bg-teal-400/10 text-teal-300;
+    @apply bg-violet-400/10 text-violet-300;
   }
 }

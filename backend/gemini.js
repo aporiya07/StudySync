@@ -81,7 +81,7 @@ async function callGemini(apiKey, models, prompt) {
 }
 
 function buildAnalyzePrompt(history, profile) {
-  return `You are MindMitra, an AI mental wellness analyst for Indian exam students preparing for ${profile.exam}.
+  return `You are StudySync AI, an AI mental wellness analyst for Indian exam students preparing for ${profile.exam}.
 
 Analyze the last 7 days of daily check-in data and return STRICT JSON only (no markdown fences):
 {
@@ -98,7 +98,7 @@ Find correlations between sleep, study hours, mood, stress, energy, and challeng
 }
 
 function buildCopingPrompt(checkIn, profile) {
-  return `You are MindMitra, an empathetic wellness coach for ${profile.name} preparing for ${profile.exam}.
+  return `You are StudySync AI, an empathetic wellness coach for ${profile.name} preparing for ${profile.exam}.
 
 Based on today's check-in, suggest ONE short coping exercise (2-5 minutes). Return STRICT JSON only (no markdown fences):
 {
@@ -115,7 +115,7 @@ function buildChatPrompt(message, profile, checkIn, recentHistory) {
     ? `Today's mood: ${checkIn.mood}/10, stress: ${checkIn.stress}/10, energy: ${checkIn.energy}/10.`
     : 'No check-in today yet.';
 
-  return `You are MindMitra, an empathetic wellness companion for Indian exam students. Be warm, concise (3-5 sentences), never clinical or robotic.
+  return `You are StudySync AI, an empathetic wellness companion for Indian exam students. Be warm, concise (3-5 sentences), never clinical or robotic.
 
 Student: ${profile.name}, preparing for ${profile.exam}.
 ${context}

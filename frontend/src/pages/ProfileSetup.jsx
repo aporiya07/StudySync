@@ -5,7 +5,7 @@ import { generateSeedHistory } from '../utils/seedData';
 
 const EXAMS = ['NEET', 'JEE', 'CUET', 'CAT', 'GATE', 'UPSC', 'Other'];
 
-export default function ProfileSetup() {
+export default function ProfileSetup({ onSaved }) {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -17,29 +17,51 @@ export default function ProfileSetup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.age || !form.targetExamDate) {
-      setError('Please fill in all fields.');
+    setError('');
+
+    const name = form.name.trim();
+    const age = Number(form.age);
+
+    if (!name) {
+      setError('Please enter your name.');
+      return;
+    }
+    if (!form.age || isNaN(age) || age < 10 || age > 99) {
+      setError('Please enter a valid age (10–99).');
       return;
     }
 
+    // Default exam date to 6 months from now if not provided
+    const targetExamDate =
+      form.targetExamDate ||
+      new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
     const profile = {
-      name: form.name.trim(),
-      age: Number(form.age),
+      name,
+      age,
       exam: form.exam,
-      targetExamDate: form.targetExamDate,
+      targetExamDate,
     };
 
-    saveProfile(profile);
-    saveHistory(generateSeedHistory());
-    navigate('/check-in');
+    try {
+      saveProfile(profile);
+      saveHistory(generateSeedHistory());
+      // Call onSaved FIRST so App re-renders with the new profile
+      // and authenticated routes become available before navigate() fires
+      if (onSaved) onSaved();
+      navigate('/check-in');
+    } catch (err) {
+      setError('Something went wrong saving your profile. Please try again.');
+      console.error('ProfileSetup save error:', err);
+    }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-ss-bg via-[#0f172a] to-[#0c1220] p-8">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-ss-bg via-[#16174a] to-[#10112a] p-8">
       <div className="ss-card w-full max-w-lg">
         <div className="mb-6 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-teal-400">
-            Welcome to MindMitra
+          <p className="text-sm font-semibold uppercase tracking-widest text-violet-400">
+            Welcome to
           </p>
           <h1 className="mt-2 text-3xl font-bold">StudySync</h1>
           <p className="mt-2 text-sm text-ss-muted">
@@ -47,10 +69,10 @@ export default function ProfileSetup() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
           <div>
             <label className="ss-label" htmlFor="name">
-              Name
+              Name <span className="text-red-400">*</span>
             </label>
             <input
               id="name"
@@ -58,12 +80,13 @@ export default function ProfileSetup() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="Your name"
+              autoComplete="off"
             />
           </div>
 
           <div>
             <label className="ss-label" htmlFor="age">
-              Age
+              Age <span className="text-red-400">*</span>
             </label>
             <input
               id="age"
@@ -97,7 +120,8 @@ export default function ProfileSetup() {
 
           <div>
             <label className="ss-label" htmlFor="date">
-              Target exam date
+              Target exam date{' '}
+              <span className="normal-case font-normal text-ss-muted">(optional)</span>
             </label>
             <input
               id="date"
@@ -108,10 +132,14 @@ export default function ProfileSetup() {
             />
           </div>
 
-          {error && <p className="text-sm text-red-400">{error}</p>}
+          {error && (
+            <div className="rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
+              {error}
+            </div>
+          )}
 
           <button type="submit" className="ss-btn w-full">
-            Get Started
+            Get Started →
           </button>
         </form>
       </div>

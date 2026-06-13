@@ -10,7 +10,7 @@ export default function Chat() {
     {
       role: 'assistant',
       content:
-        "Hi! I'm MindMitra, your wellness companion. How are you feeling about your prep today?",
+        "Hi! I'm StudySync AI, your wellness companion. How are you feeling about your prep today?",
     },
   ]);
   const [input, setInput] = useState('');
@@ -52,11 +52,11 @@ export default function Chat() {
     <div className="flex max-w-2xl flex-col" style={{ height: 'calc(100vh - 180px)' }}>
       <div className="mb-4">
         <h2 className="text-xl font-semibold">Companion Chat</h2>
-        <p className="text-sm text-ss-muted">Talk to MindMitra — your empathetic study wellness companion.</p>
+        <p className="text-sm text-ss-muted">Talk to StudySync AI — your empathetic study wellness companion.</p>
       </div>
 
       <div className="mb-3 rounded-xl border border-amber-400/20 bg-amber-400/5 px-4 py-3 text-xs text-amber-200/90">
-        MindMitra supports emotional wellness and is not a substitute for professional help.
+        StudySync AI supports emotional wellness and is not a substitute for professional help.
       </div>
 
       <div className="ss-card flex flex-1 flex-col overflow-hidden p-0">

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { getProfile } from './utils/storage';
 import AppShell from './components/AppShell';
@@ -17,12 +18,17 @@ function ShellLayout() {
 }
 
 export default function App() {
-  const profile = getProfile();
+  // Must be state — plain getProfile() call won't re-render after ProfileSetup saves
+  const [profile, setProfile] = useState(() => getProfile());
+
+  const handleProfileSaved = () => {
+    setProfile(getProfile());
+  };
 
   if (!profile) {
     return (
       <Routes>
-        <Route path="/setup" element={<ProfileSetup />} />
+        <Route path="/setup" element={<ProfileSetup onSaved={handleProfileSaved} />} />
         <Route path="*" element={<Navigate to="/setup" replace />} />
       </Routes>
     );
