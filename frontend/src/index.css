@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-ss-bg font-sans text-slate-100 antialiased;
+    min-width: 1024px;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .ss-card {
+    @apply rounded-2xl border border-ss-border bg-ss-card p-6 backdrop-blur-sm;
+  }
+
+  .ss-input {
+    @apply w-full rounded-xl border border-ss-border bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-teal-400/50 focus:ring-2 focus:ring-teal-400/20;
+  }
+
+  .ss-label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-wider text-ss-muted;
+  }
+
+  .ss-btn {
+    @apply rounded-xl bg-gradient-to-r from-teal-500 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .ss-btn-ghost {
+    @apply rounded-xl border border-ss-border bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/10;
+  }
+
+  .ss-chip {
+    @apply cursor-pointer rounded-full border border-ss-border bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-teal-400/40;
+  }
+
+  .ss-chip-active {
+    @apply border-teal-400/60 bg-teal-400/10 text-teal-300;
+  }
+
+  .ss-nav-item {
+    @apply flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-400 transition hover:bg-white/5 hover:text-slate-200;
+  }
+
+  .ss-nav-item-active {
+    @apply bg-teal-400/10 text-teal-300;
+  }
+}
