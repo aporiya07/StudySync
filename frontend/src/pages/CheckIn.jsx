@@ -114,8 +114,9 @@ export default function CheckIn() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="ss-label">Sleep hours</label>
+            <label htmlFor="sleep" className="ss-label">Sleep hours</label>
             <select
+              id="sleep"
               className="ss-input"
               value={form.sleep}
               onChange={(e) => setForm({ ...form, sleep: e.target.value })}
@@ -128,8 +129,9 @@ export default function CheckIn() {
             </select>
           </div>
           <div>
-            <label className="ss-label">Study hours</label>
+            <label htmlFor="study" className="ss-label">Study hours</label>
             <select
+              id="study"
               className="ss-input"
               value={form.studyHours}
               onChange={(e) => setForm({ ...form, studyHours: e.target.value })}
@@ -143,33 +145,40 @@ export default function CheckIn() {
           </div>
         </div>
 
-        <div>
-          <label className="ss-label">Today&apos;s biggest challenges</label>
-          <div className="flex flex-wrap gap-2">
+        <fieldset>
+          <legend className="ss-label">Today&apos;s biggest challenges</legend>
+          <div className="flex flex-wrap gap-2" role="group">
             {CHALLENGES.map((challenge) => (
               <button
                 key={challenge}
                 type="button"
                 onClick={() => toggleChallenge(challenge)}
+                aria-pressed={form.challenges.includes(challenge)}
                 className={`ss-chip ${form.challenges.includes(challenge) ? 'ss-chip-active' : ''}`}
               >
                 {challenge}
               </button>
             ))}
           </div>
-        </div>
+        </fieldset>
 
         <div>
-          <label className="ss-label">{getReflectionPrompt()}</label>
+          <label htmlFor="reflection" className="ss-label">{getReflectionPrompt()}</label>
           <input
+            id="reflection"
             className="ss-input"
             value={form.reflection}
             onChange={(e) => setForm({ ...form, reflection: e.target.value })}
             placeholder="Share briefly..."
+            autoComplete="off"
           />
         </div>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && (
+          <p role="alert" className="text-sm text-red-400">
+            {error}
+          </p>
+        )}
 
         <button type="submit" className="ss-btn w-full">
           Submit Check-In

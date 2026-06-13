@@ -13,7 +13,7 @@ export default function AppShell({ profile, children }) {
   return (
     <div className="flex min-h-screen">
       <SidebarNav />
-      <main className="flex-1 overflow-y-auto px-10 py-8">
+      <main id="main-content" className="flex-1 overflow-y-auto px-10 py-8" aria-label="Main content">
         <Header profile={profile} onReset={handleReset} />
         {children}
       </main>

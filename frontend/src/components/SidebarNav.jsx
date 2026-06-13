@@ -9,24 +9,31 @@ const NAV_ITEMS = [
 
 export default function SidebarNav() {
   return (
-    <aside className="flex w-56 shrink-0 flex-col border-r border-ss-border bg-black/20 px-4 py-6">
-      <div className="mb-8 px-2">
-        <p className="text-lg font-bold text-teal-300">StudySync</p>
-        <p className="text-xs text-ss-muted">Balance studies & wellbeing</p>
+    <aside
+      className="flex w-56 shrink-0 flex-col border-r border-ss-border bg-black/20 px-4 py-6"
+      aria-label="Main navigation"
+    >
+      <div className="mb-8 px-2" aria-hidden="true">
+        <p className="text-lg font-bold text-violet-300">StudySync</p>
+        <p className="text-xs text-ss-muted">Balance studies &amp; wellbeing</p>
       </div>
-      <nav className="flex flex-1 flex-col gap-1">
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) =>
-              `ss-nav-item ${isActive ? 'ss-nav-item-active' : ''}`
-            }
-          >
-            <span>{item.icon}</span>
-            <span>{item.label}</span>
-          </NavLink>
-        ))}
+      <nav aria-label="Site sections">
+        <ul className="flex flex-col gap-1" role="list">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.to}>
+              <NavLink
+                to={item.to}
+                className={({ isActive }) =>
+                  `ss-nav-item ${isActive ? 'ss-nav-item-active' : ''}`
+                }
+                aria-current={({ isActive }) => (isActive ? 'page' : undefined)}
+              >
+                <span aria-hidden="true">{item.icon}</span>
+                <span>{item.label}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </nav>
     </aside>
   );
