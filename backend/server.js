@@ -9,6 +9,7 @@ const {
   getAnalyzeFallback,
   getCopingFallback,
   getCrisisResponse,
+  getChatFallback,
 } = require('./fallbacks');
 const {
   analyzeHistory,
@@ -81,8 +82,7 @@ app.post('/api/chat', async (req, res) => {
   }
 
   if (USE_MOCKS || !process.env.GEMINI_API_KEY) {
-    const fallback = require('./fallbacks').getChatFallback();
-    return res.json(fallback);
+    return res.json(getChatFallback());
   }
 
   try {
@@ -96,7 +96,7 @@ app.post('/api/chat', async (req, res) => {
     return res.json(result);
   } catch (err) {
     console.error('Chat route error:', err.message);
-    return res.json(require('./fallbacks').getChatFallback());
+    return res.json(getChatFallback());
   }
 });
 

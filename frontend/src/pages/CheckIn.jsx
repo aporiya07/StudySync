@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import SliderField from '../components/SliderField';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -49,6 +49,12 @@ export default function CheckIn() {
   const [form, setForm] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => { isMounted.current = false; };
+  }, []);
 
   const toggleChallenge = (challenge) => {
     setForm((prev) => ({
@@ -72,11 +78,17 @@ export default function CheckIn() {
     try {
       const coping = await fetchCopingStrategy(profile, checkIn);
       upsertCheckIn({ ...checkIn, copingStrategy: coping });
-      navigate('/insights');
+      if (isMounted.current) {
+        navigate('/insights');
+      }
     } catch {
-      setError('Could not generate coping strategy. Please try again.');
+      if (isMounted.current) {
+        setError('Could not generate coping strategy. Please try again.');
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) {
+        setLoading(false);
+      }
     }
   };
 

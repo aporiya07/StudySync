@@ -22,6 +22,13 @@ export default function Chat() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
 
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => { isMounted.current = false; };
+  }, []);
+
   const handleSend = async (e) => {
     e.preventDefault();
     const text = input.trim();
@@ -35,22 +42,28 @@ export default function Chat() {
       const checkIn = getTodayCheckIn();
       const recentHistory = getLast7Days();
       const reply = await fetchChat(profile, text, checkIn, recentHistory);
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: reply.message, isCrisis: reply.isCrisis },
-      ]);
+      if (isMounted.current) {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: reply.message, isCrisis: reply.isCrisis },
+        ]);
+      }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: "I'm having trouble connecting right now. Please try again in a moment.",
-        },
-      ]);
+      if (isMounted.current) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: "I'm having trouble connecting right now. Please try again in a moment.",
+          },
+        ]);
+      }
     } finally {
-      setLoading(false);
-      // Return focus to input after response
-      inputRef.current?.focus();
+      if (isMounted.current) {
+        setLoading(false);
+        // Return focus to input after response
+        inputRef.current?.focus();
+      }
     }
   };
 

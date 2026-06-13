@@ -17,17 +17,28 @@ export default function Dashboard() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    let isMounted = true;
     const history = getLast7Days();
 
     if (history.length < 2) {
-      setLoading(false);
+      if (isMounted) setLoading(false);
       return;
     }
 
     fetchAnalyze(profile, history)
-      .then(setData)
-      .catch(() => setError('Could not load weekly analysis. Showing cached insights if available.'))
-      .finally(() => setLoading(false));
+      .then((res) => {
+        if (isMounted) setData(res);
+      })
+      .catch(() => {
+        if (isMounted) setError('Could not load weekly analysis. Showing cached insights if available.');
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [profile]);
 
   if (loading) {

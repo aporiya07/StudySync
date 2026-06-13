@@ -56,8 +56,19 @@ function isQuotaError(err) {
   );
 }
 
+let cachedGenAI = null;
+let cachedApiKey = null;
+
+function getGenAI(apiKey) {
+  if (!cachedGenAI || cachedApiKey !== apiKey) {
+    cachedGenAI = new GoogleGenerativeAI(apiKey);
+    cachedApiKey = apiKey;
+  }
+  return cachedGenAI;
+}
+
 async function callGemini(apiKey, models, prompt) {
-  const genAI = new GoogleGenerativeAI(apiKey);
+  const genAI = getGenAI(apiKey);
   let lastError;
 
   for (let i = 0; i < models.length; i++) {
