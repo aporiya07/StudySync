@@ -84,6 +84,11 @@ NODE_ENV=production npm start
 - **AI:** Google Gemini (`gemini-3.5-flash` for analysis, `gemini-2.5-flash-lite` for coping + chat)
 - **Storage:** localStorage (profile + check-in history)
 
+## Docs
+
+- [TEST_CASES.md](TEST_CASES.md) — Unit tests, manual test scenarios, and coverage summary
+- [EVALUATION.md](EVALUATION.md) — Self-assessment: code quality, security, efficiency, testing, accuracy, problem alignment
+
 ## License
 
 See [LICENSE](LICENSE).
