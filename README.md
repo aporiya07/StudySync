@@ -92,3 +92,8 @@ NODE_ENV=production npm start
 ## License
 
 See [LICENSE](LICENSE).
+
+
+## What I'd improve with more time
+
+This was built for a hackathon, so some parts were kept deliberately simple. With more time I would expand the tests beyond crisis detection and JSON parsing to cover the API routes, add linting, have the crisis-escalation resources reviewed by a qualified professional, and add rate limiting to the Gemini-backed endpoints.
